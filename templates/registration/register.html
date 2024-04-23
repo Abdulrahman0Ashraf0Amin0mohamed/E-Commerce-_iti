@@ -1,0 +1,49 @@
+{% extends 'layouts/base.html' %}
+{% block content %}
+{% load static %}
+
+<style>
+  .all{
+
+    color=White;
+  }
+</style>
+
+
+<link rel="stylesheet" type="text/css" href="{% static 'library/css/styles2.css' %}">
+  <h2 style="color:White">Create new Account</h2>
+  <form method="post" style="color:White">
+    {% csrf_token %}
+    
+    <div class="form-group">
+      {{ form.username.label_tag }}
+      {{ form.username }}
+      <small class="all" >Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</small>
+    </div>
+    
+    <div class="form-group">
+      {{ form.password1.label_tag }}
+      {{ form.password1 }}
+      <small class="all" >
+        Your password can’t be too similar to your other personal information.<br>
+        Your password must contain at least 8 characters.<br>
+        Your password can’t be a commonly used password.<br>
+        Your password can’t be entirely numeric.
+    </small>
+    </div>
+    
+    <div class="form-group">
+      {{ form.password2.label_tag }}
+      {{ form.password2 }}
+      <small class="all" >Enter the same password as before, for verification.</small>
+    </div>
+    
+    <div class="form-group">
+      {{ form.id.label_tag }}
+      {{ form.id }}
+      <small class="all">Enter your ID</small>
+    </div>
+    
+    <button type="submit">Register</button>
+  </form>
+{% endblock %}

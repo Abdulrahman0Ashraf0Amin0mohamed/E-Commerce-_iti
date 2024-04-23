@@ -1,0 +1,43 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block title %} All Products {% endblock %}
+
+{% block body %}
+<div class="bg-light">
+    <a href="{% url 'library.create'%}" class=" btn btn-dark"> Add new Prodeuct  </a>
+    <a href="{% url 'library.homecategory'%}" class="btn btn-info" style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;"> Home Category  </a>
+    <a href="" class=" btn btn-dark"> Borrowed Books   </a>
+    <h2 style="background-color: dimgrey; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;"> All Products </h2>
+    <!--{{courses}}-->
+
+
+    {% for ama in library %}
+
+    <div style="display:inline-block">
+        <div class="card" style="width: 18rem;">
+            <img src="{{ama.get_image_url}}" width="300" height="300" class="card-img-top"
+                alt="...">
+            <div class="card-body" style="background-color: darkkhaki; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">
+                <h5 class="card-title">{{ama.name}}</h5>
+                
+                <a href="{% url 'library.show' ama.id %}" class="btn btn-primary">Show</a>
+                
+                
+                
+            </div>
+        </div>
+    </div>
+
+    {% endfor %}
+    {% endblock %}
+</div>
+
+{% block content %}
+   
+<h1> Welecom in library Store </h1>
+
+
+
+{% endblock %}
+
+
