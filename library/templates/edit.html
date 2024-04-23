@@ -1,0 +1,39 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block title %} Edit Product {% endblock %}
+
+{% block content %}
+<div class="bg-light">
+    <h1> Edit Product : {{library.name}}</h1>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="mb-3">
+
+            <label class="form-label">Name </label>
+            <input type="text" id='name' name='name' value='{{library.name}}' class="form-control"
+                aria-describedby="emailHelp">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">no_of_items </label>
+            <input type="number" id="no_of_item" name="no_of_item" value='{{library.no_of_item}}' class="form-control"
+                aria-describedby="emailHelp">
+        </div>
+
+<div>
+        <label for="image">Image:</label>
+        <input type="file" id="image" name="image">
+        <img src="{{library.get_image_url}}" alt="{{ library.name }}" width="100">
+    </div>
+        <button type="submit" class="btn btn-primary">Update</button>
+        <a href="{% url 'library.home' %}" class="btn btn-warning">Back to all Products</a>
+
+
+    </form>
+
+</div>
+
+{% endblock %}
+
+

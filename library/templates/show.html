@@ -1,0 +1,50 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block title %} Books Info {% endblock %}
+
+{% block content %}
+
+<style>
+   
+    .all {
+        background-color: MidnightBlue; /* Change this color to your desired background color */
+        width:300px;
+        
+    }
+
+</style>    
+
+<div class="all">
+    <h1 style="color:Gainsboro;"> Books Info </h1>
+
+    <div class="card" style="width: 18rem;">
+        <img src="{{library.get_image_url}}" class="card-img-top" alt="...">
+        <div class="card-body" style="background-color:black ;">
+            <h5 class="card-title" style="color: Silver;">{{library.name}}</h5>
+            <p class="card-text"style="color: Silver;" >Created at: {{library.created_at}}</p>
+            <p class="card-text"style="color: Silver;" >Updated at: {{library.updated_at}}</p>
+            <p class="card-text"style="color: Silver;" >no_of_items: {{library.no_of_item}}</p>
+
+            {% if request.user.is_superuser %}
+            <a href="{% url 'library.home' %}" class="btn btn-primary" >Back to all Books</a>
+            {% else %}
+            <a href="{% url 'library.home2' %}" class="btn btn-primary" >Back to all Books</a>
+          {% endif %}
+            
+            
+        </div>
+    </div>
+</div>
+
+<h1 style="color:Gainsboro;">Students in the {{ library.category }} library</h1>
+
+{% for ama in library.category.library.all %}
+    {% if ama.id != library.id %}
+        <a href="{{ ama.get_show_url }}" class="btn btn-success">{{ ama.name }}</a>
+        
+    {% endif %}
+{% endfor %}
+
+
+
+{% endblock %}

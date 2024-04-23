@@ -1,0 +1,41 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block title %} All Users {% endblock %}
+
+
+{% block body %}
+<div class="bg-light">
+    <h2 style="background-color: black; color: DarkKhaki; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;"> All Users </h2>
+   
+    <div style="background-color: #1a0066; display: flex; flex-wrap: wrap;">
+        
+        {% for user in users %}
+        <div class="card" style="width: 18rem; margin: 10px;">
+            
+            <div class="card-body" style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">
+                <h5 class="card-title">User: {{ user.username }}</h5>
+                <h5 class="card-title">ID: {{ user.id }}</h5>
+                {% comment %} <p class="card-text">Email: {{ user.email }}</p> {% endcomment %}
+                <!-- Add more user information as needed -->
+                
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+{% for ama in library %}
+
+<div style="display:inline-block">
+    <div class="card" style="width: 18rem;">
+        <img src="{{ama.get_image_url}}" width="300" height="300" class="card-img-top"
+            alt="...">
+        <div class="card-body" style="background-color: darkkhaki; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">
+            <h5 class="card-title">{{ama.name}}</h5>
+          
+            
+        </div>
+    </div>
+</div>
+
+{% endfor %}

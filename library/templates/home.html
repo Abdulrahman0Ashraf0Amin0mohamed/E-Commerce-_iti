@@ -1,0 +1,125 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block title %} All Books {% endblock %}
+
+{% block body %}
+<style>
+   
+    .all {
+        background-color: #456ba7; /* Change this color to your desired background color */
+        
+    }
+
+    .button {
+        display: inline-block;
+        border-radius: 6px;
+        background-color: MidnightBlue;
+        border: none;
+        color: #FFFFFF;
+        text-align: center;
+        font-size: 20px;
+        padding: 5px 20px; /* Adjust the padding to make all buttons the same size */
+        transition: all 0.5s;
+        cursor: pointer;
+        margin: 5px;
+    }
+
+    .button span {
+        cursor: pointer;
+        display: inline-block;
+        position: relative;
+        transition: 0.5s;
+    }
+
+    .button span:after {
+        content: '\00bb';
+        position: absolute;
+        opacity: 0;
+        top: 0;
+        right: -20px;
+        transition: 0.5s;
+    }
+
+    .button:hover span {
+        padding-right: 25px;
+    }
+
+    .button:hover span:after {
+        opacity: 1;
+        right: 0;
+    }
+
+    /* Define different background colors for each button */
+    .button:nth-child(1) {
+        background-color: MidnightBlue; /* Change this color as needed */
+    }
+
+    .button:nth-child(2) {
+        background-color: Teal; /* Change this color as needed */
+    }
+
+    .button:nth-child(3) {
+        background-color: #333333; /* Change this color as needed */
+    }
+
+    .btn span {
+        cursor: pointer;
+        display: inline-block;
+        position: relative;
+        transition: 0.5s;
+    }
+
+
+    .btn:hover span {
+        padding-right: 25px;
+    }
+
+    .btn span:after {
+        content: '\00bb';
+        position: absolute;
+        opacity: 0;
+        top: 0;
+        right: -20px;
+        transition: 0.5s;
+    }
+
+    .btn:hover span:after {
+        opacity: 1;
+        right: 0;
+    }
+    </style>
+
+<div class="all" >
+    <a href="{% url 'library.create'%}" class="button" style="font-family: Tahoma, Verdana, sans-serif;"><span> Add new Books </span></a>
+    <a href="{% url 'library.homecategory'%}" class="button" style="font-family: Tahoma, Verdana, sans-serif;"><span> All student </span></a>
+    <a href="{% url 'library.all_borrowings'%}" class="button" style="font-family: Tahoma, Verdana, sans-serif;"><span> Books Are Borrowed </span></a>
+
+    <h2 style="background-color: black; color: DarkKhaki; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">All Books</h2>    <!--{{courses}}-->
+
+
+    {% for ama in library %}
+
+    <div class="card" style="width: 18rem; display: inline-block; margin-right: 10px; ">
+        <img src="{{ama.get_image_url}}" width="300" height="300" class="card-img-top" alt="...">
+        <div class="card-body" style="background-color:black ; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; ">
+            <h5 class="card-title" style="color: Silver;">{{ama.name}}</h5>
+            <a href="{% url 'library.show' ama.id %}" class="btn btn-primary"><span>Show</span></a>
+            <a href="{% url 'library.edit' ama.id %}" class="btn btn-warning"><span>Edit</span></a>
+            <a href="{% url 'library.delete' ama.id %}"class="btn btn-danger"><span>Delete</span></a>
+            
+        </div>
+    </div>
+
+    {% endfor %}
+    {% endblock %}
+</div>
+
+{% block content %}
+   
+<h1 style="color:Gainsboro;"> Welecome Admin  in library Store </h1>
+
+
+
+{% endblock %}
+
+

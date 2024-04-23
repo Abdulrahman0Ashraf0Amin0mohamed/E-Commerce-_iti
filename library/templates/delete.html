@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            margin: 250px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 50px;
+        }
+
+        p {
+            font-size: 20px;
+        }
+
+        .btn-danger {
+            background-color: #f44336;
+            color: white;
+            padding: 14px 20px;
+            margin: 15px 0;
+            margin-left: 330px;
+            border: none;
+            cursor: pointer;
+            width: 18%;
+            opacity: 0.9;
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+            color: white;
+            opacity: 1;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            opacity: 0.9;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            color: white;
+            opacity: 1;
+        }
+
+        #loading {
+            display: none;
+            text-align: center;
+        }
+
+        .ring {
+            display: inline-block;
+            position: relative;
+            width: 80px;
+            height: 80px;
+            margin: 0 auto;
+        }
+
+        .ring .circle {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 8px solid #3498db;
+            border-top: 8px solid transparent;
+            border-radius: 50%;
+            animation: spin 1.5s linear infinite;
+        }
+
+        span {
+            color: #3498db;
+            font-size: 20px;
+            letter-spacing: 1px;
+            margin-top: 20px;
+            display: block;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Delete Book</h1>
+    <p style="text-align: center;">Are you sure you want to delete <strong>{{ library.name }}</strong></p>
+    <form action="" method="post">
+        {% csrf_token %}
+        <button id="deleteBtn" class="btn btn-danger" type="button" value="Delete" onclick="showLoading()">Delete</button>
+        <a href="{% url 'library.home' %}" class="btn btn-primary">Back to all Book</a>
+    </form>
+    <div id="loading">
+        <div class="ring">
+            <div class="circle"></div>
+        </div>
+        <span class="isLoaded">LOADING...</span>
+    </div>
+    <script>
+        function showLoading() {
+            event.preventDefault(); // Prevent form submission
+
+            document.getElementById('loading').style.display = 'block';
+
+            setTimeout(function () {
+                document.getElementById('loading').style.display = 'none';
+                // Submit the form programmatically (since you're using Django, this is how you'd submit the form)
+                document.forms[0].submit();
+            }, 2000); // Display time in milliseconds (here 3 seconds)
+        }
+    </script>
+</body>
+</html>

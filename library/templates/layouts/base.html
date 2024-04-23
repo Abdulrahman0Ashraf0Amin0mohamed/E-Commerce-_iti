@@ -1,0 +1,114 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %} {% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'library/css/bootstrap.css' %}">
+
+  <style>
+   
+    .login-button {
+        background-color: #007bff;
+        color: #fff;
+    }
+
+    .login-button:hover {
+        background-color: #0056b3;
+    }
+
+    
+    .logout-button {
+        background-color: #e53935;
+        color: #fff;
+    }
+
+    .logout-button:hover {
+        background-color: #c62828;
+    }
+
+    .register-button {
+      background-color: green;
+      color: #fff;
+  }
+
+  .register-button:hover {
+      background-color: #0056b3;
+  }
+</style>
+</head>
+
+<body style="background-color: #4b0066">
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">library</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            {% if user.id %}
+            <li class="nav-item">
+              <a class="nav-link logout-button"  href="{% url 'logout' %}"> Logout</a>
+            </li>
+              {% else %}
+               <li class="nav-item">
+              <a class="nav-link login-button"  href="{% url 'login' %}">  Login</a>
+            </li>
+            &nbsp;
+            <li class="nav-item">
+              <a class="nav-link register-button" href="{% url 'register'%}"> Register</a>
+            </li>
+  
+            {% endif %}
+
+            {% if request.user.is_superuser %}
+                <a class="nav-link active" aria-current="page" href="{% url 'library.home' %}">Books</a>
+            {% else %}
+                <a class="nav-link active" aria-current="page" href="{% url 'library.home2' %}">Books</a>
+            {% endif %}
+        </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'library.profile' %}">Profile</a>
+          </li>
+          {% if request.user.is_superuser %}
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'library.homecategory'%}">Students</a>
+          </li>
+          {% endif %}
+
+         
+        </ul>
+        {% if request.user.is_superuser %}
+        <form class="d-flex" role="search" method="GET" action="{% url 'library.search_results' %}">
+          <input class="form-control me-2" type="search" name="id" placeholder="Search by ID" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+      {% endif %}
+      </div>
+    </div>
+  </nav>
+  <div class="container">
+    <div class=" font-monospace">
+      {% block content %}
+
+      {%endblock%}
+    </div>
+
+    <div style="background: #0dcaf0; font-family: Courier; font-style: italic;">
+      {% block body %}
+      {% endblock %}
+
+    </div>
+  </div>
+
+ 
+</body>
+
+</html>
